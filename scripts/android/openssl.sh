@@ -1,10 +1,12 @@
 #!/bin/bash
 
 if [[ ${ARCH} == "x86" ]]; then
-
-  # openssl does not support 32-bit apple architectures
-  echo -e "ERROR: openssl is not supported on $ARCH architecture for $FFMPEG_KIT_BUILD_TYPE platform.\n" 1>>"${BASEDIR}"/build.log 2>&1
-  return 200
+  # MODIFICACIÓN: En lugar de retornar error 200, salimos con éxito (0)
+  # para que el script principal continúe. FFmpeg.sh se encargará de NO usar OpenSSL en x86.
+  echo -e "INFO: openssl skipped on $ARCH (will use GnuTLS in ffmpeg step).\n" 1>>"${BASEDIR}"/build.log 2>&1
+  
+  # Importante: No retornamos error. Retornamos 0 (éxito)
+  return 0
 fi
 
 # SET BUILD OPTIONS

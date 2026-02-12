@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export APP_ALLOW_MISSING_DEPS=true
+export APP_CFLAGS="-Wno-single-bit-bitfield-constant-conversion -Wno-implicit-function-declaration -include string.h"
+
 if [[ -z ${ANDROID_SDK_ROOT} ]]; then
   echo -e "\n(*) ANDROID_SDK_ROOT not defined\n"
   exit 1
